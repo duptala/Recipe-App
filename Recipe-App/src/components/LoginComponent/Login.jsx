@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import './Registration.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export const Registration = () => {
+export const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/auth/register', {username, password})
+        axios.post('http://localhost:3001/auth/login', {username, password})
         .then(result => {
             console.log(result)
         }).catch(err => console.log(err))
@@ -30,7 +30,7 @@ export const Registration = () => {
                         onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <button className='submitButton'>submit</button>
-                    <Link to='/auth/login'><button className="login-btn">Login</button></Link>
+                    <Link to='/auth/register'><button className="register-btn">Register</button></Link>
                 </form>
             </div>
         </div>
