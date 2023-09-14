@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const userRouter = require('./Routes/auth')
+const cookieParser = require('cookie-parser')
 
 const app = express();
 
@@ -15,10 +16,16 @@ async function connect() {
         console.error(err)
     }
 }
-// calling the function 
+// calling the function
 connect();
 
-app.use(cors())
+app.use(cors({
+    origin: ["http://127.0.0.1:5173"],
+    methods: ["GET", "POST"],
+    credentials: true
+}))
+
+app.use(cookieParser())
 app.use(express.json())
 app.use('/auth', userRouter)
 
